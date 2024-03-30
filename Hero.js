@@ -1,24 +1,30 @@
 import React from 'react';
+import phoneImg from './images/phone.svg';
+import { useGlobalContext } from './context';
 
-import { Section, SectionText, SectionTitle } from '../../styles/GlobalComponents';
-import Button from '../../styles/GlobalComponents/Button';
-import { LeftSection } from './HeroStyles';
-
-const Hero = (props) => (
-  <>
-    <Section row nopadding>
-      <LeftSection>
-        <SectionTitle main center>
-          Welcome To <br />
-          My Personal Portfolio
-        </SectionTitle>
-        <SectionText>
-        The purpose of JavaScript Mastery is to help aspiring and established developers to take their development skills to the next level and build awesome apps.
-        </SectionText>
-        <Button onClick={props.handleClick}>Learn More</Button>
-      </LeftSection>
-    </Section>
-  </>
-);
+const Hero = () => {
+  const { closeSubmenu } = useGlobalContext();
+  return (
+    <section className='hero' onMouseOver={closeSubmenu}>
+      <div className='hero-center'>
+        <article className='hero-info'>
+          <h1>
+            Payments infrastructure <br />
+            for the internet
+          </h1>
+          <p>
+            Millions of companies of all sizes—from startups to Fortune 500s—use
+            Stripe’s software and APIs to accept payments, send payouts, and
+            manage their businesses online.
+          </p>
+          <button className='btn'>Start now</button>
+        </article>
+        <article className='hero-images'>
+          <img src={phoneImg} className='phone-img' alt='phone' />
+        </article>
+      </div>
+    </section>
+  );
+};
 
 export default Hero;

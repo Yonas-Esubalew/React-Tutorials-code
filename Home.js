@@ -1,13 +1,19 @@
-import React from 'react'
-import Form from './SearchForm'
-import Movies from './Movies'
+import React from 'react';
+import { FaBars } from 'react-icons/fa';
+import { useGlobalContext } from './context';
+
 const Home = () => {
+  const { openSidebar, openModal } = useGlobalContext();
   return (
     <main>
-      <Form />
-      <Movies />
+      <button onClick={openSidebar} className='sidebar-toggle'>
+        <FaBars />
+      </button>
+      <button onClick={openModal} className='btn'>
+        show modal
+      </button>
     </main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
