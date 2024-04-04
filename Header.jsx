@@ -1,22 +1,35 @@
-import React from 'react';
+import { useGetTopProductsQuery } from "../redux/api/productApiSlice";
+import Loader from "./Loader";
+import SmallProduct from "../pages/Products/SmallProduct";
+import ProductCarousel from "../pages/Products/ProductCarousel";
 
-import { SubHeading } from '../../components';
-import { images } from '../../constants';
-import './Header.css';
+const Header = () => {
+  const { data, isLoading, error } = useGetTopProductsQuery();
 
-const Header = () => (
-  <div className="app__header app__wrapper section__padding" id="home">
-    <div className="app__wrapper_info">
-      <SubHeading title="Chase the new flavour" />
-      <h1 className="app__header-h1">The Key To Fine Dining</h1>
-      <p className="p__opensans" style={{ margin: '2rem 0' }}>Sit tellus lobortis sed senectus vivamus molestie. Condimentum volutpat morbi facilisis quam scelerisque sapien. Et, penatibus aliquam amet tellus </p>
-      <button type="button" className="custom__button">Explore Menu</button>
-    </div>
+  if (isLoading) {
+    return <Loader />;
+  }
 
-    <div className="app__wrapper_img">
-      <img src={images.welcome} alt="header_img" />
-    </div>
-  </div>
-);
+  if (error) {
+    return <h1>ERROR</h1>;
+  }
+
+  return (
+    <>
+      <div className="flex justify-around">
+        <div className="xl:block lg:hidden md:hidden:sm:hidden">
+          <div className="grid grid-cols-2">
+            {data.map((product) => (
+              <div key={product._id}>
+                <SmallProduct product={product} />
+              </div>
+            ))}
+          </div>
+        </div>
+        <ProductCarousel />
+      </div>
+    </>
+  );
+};
 
 export default Header;
