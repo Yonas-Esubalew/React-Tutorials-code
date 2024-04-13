@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Login from "../components/Login/Login.jsx";
+import Signup from "../components/Signup/Signup";
 
-const LoginPage = () => {
+const SignupPage = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useSelector((state) => state.user);
 
@@ -12,12 +12,11 @@ const LoginPage = () => {
       navigate("/");
     }
   }, [])
-  
   return (
     <div>
-        <Login />
+        <Signup />
     </div>
   )
 }
 
-export default LoginPage;
+export default SignupPage
